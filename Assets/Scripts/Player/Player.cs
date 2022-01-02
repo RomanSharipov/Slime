@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform _blotSpawnPoint;
     [SerializeField] private float _delayBetweenSpawnBlot;
     [SerializeField] private int _score;
+    [SerializeField] private Material _transparentMaterial;
 
     private PlayerInput _playerInput;
     private PlayerMovement _playerMovement;
@@ -56,14 +57,18 @@ public class Player : MonoBehaviour
 
     public void TryEat(Item item)
     {
-        if (_score >= item.RequiredScore)
+        if (_upgradingSlime.LevelSlime >= item.RequiredLevel)
         {
             Eat(item);
             _score++;
-            if (_score % UpgradingSlime.FrequencyTimes == 0)
+            if (_score % UpgradingSlime.CountScoreForUpgrade == 0)
             {
                 SlimeWasUpgraded?.Invoke();
             }
+        }
+        else
+        {
+            item.SetTransparentMaterial(_transparentMaterial);
         }
     }
 

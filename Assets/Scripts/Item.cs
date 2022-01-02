@@ -4,19 +4,23 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    [SerializeField] private int _requiredScore;
+    [SerializeField] private int _requiredLevel;
     [SerializeField] private float _destroyPositionY;
     [SerializeField] private float _speedDrown;
     [SerializeField] private Vector3 _targetScale;
     [SerializeField] private float _speedReduceScale;
 
-    public int RequiredScore => _requiredScore;
+    public int RequiredLevel => _requiredLevel;
 
     private Transform _transform;
+    private MeshRenderer _meshRenderer;
+    private Material _startMaterial;
 
     private void Start()
     {
         _transform = GetComponent<Transform>();
+        _meshRenderer = GetComponent<MeshRenderer>();
+        _startMaterial = GetComponent<MeshRenderer>().material;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -26,6 +30,15 @@ public class Item : MonoBehaviour
             player.TryEat(this);
         }
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.TryGetComponent(out Player player))
+        {
+            _meshRenderer.material = _startMaterial;
+        }
+    }
+
 
     public void Die(Player player)
     {
@@ -41,8 +54,14 @@ public class Item : MonoBehaviour
             targetPositionY = _transform.position.y - Time.deltaTime * _speedDrown;
             targetPosition.Set(player.transform.position.x, targetPositionY, player.transform.position.z);
             _transform.position = Vector3.MoveTowards(_transform.position, targetPosition, Time.deltaTime * _speedDrown);
+            _transform.localScale = Vector3.MoveTowards(_transform.localScale, _targetScale, Time.deltaTime * _speedReduceScale);
             yield return null;
         }
         Destroy(gameObject);
+    }
+
+    public void SetTransparentMaterial(Material material)
+    {
+        _meshRenderer.material = material;
     }
 }

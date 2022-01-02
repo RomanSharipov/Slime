@@ -10,8 +10,8 @@ public class UpgradingSlime : MonoBehaviour
     [SerializeField] private int _levelSlime = 1;
 
     private Player _player;
-    public const float FrequencyTimes = 7;
-
+    public const float CountScoreForUpgrade = 7;
+    public int LevelSlime => _levelSlime;
     public void Init()
     {
         _player = GetComponent<Player>();
