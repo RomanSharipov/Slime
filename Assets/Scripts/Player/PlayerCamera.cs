@@ -13,6 +13,8 @@ public class PlayerCamera : MonoBehaviour
     [SerializeField] private float _stepHeightY;
     [SerializeField] private float _speedUpdatePosition;
 
+    private Coroutine _coroutine;
+
     public void Init()
     {
         _transform = GetComponent<Transform>();

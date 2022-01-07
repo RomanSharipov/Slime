@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Player))]
 public class PlayerAnimator : MonoBehaviour
 {
+    private const string Walk = "Walk";
     private Animator _animator;
     private Player _player;
     private Vector3 _startScale;
@@ -19,12 +20,12 @@ public class PlayerAnimator : MonoBehaviour
 
     private void OnMove(Vector2 direction)
     {
-        _animator.SetBool("Walk",true);
+        _animator.SetBool(Walk, true);
     }
 
     private void OnIdle()
     {
-        _animator.SetBool("Walk", false);
+        _animator.SetBool(Walk, false);
     }
 
     private void OnDisable()

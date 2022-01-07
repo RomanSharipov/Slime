@@ -12,12 +12,12 @@ public class UpgradingSlime : MonoBehaviour
     private Player _player;
     public const float CountScoreForUpgrade = 7;
     public int LevelSlime => _levelSlime;
+
     public void Init()
     {
         _player = GetComponent<Player>();
         _player.SlimeWasUpgraded += OnUpgradeSlimeLevel;
     }
-
 
     private void OnUpgradeSlimeLevel()
     {

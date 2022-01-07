@@ -31,7 +31,6 @@ public class PlayerMovement : MonoBehaviour
             _rotation = Quaternion.LookRotation(_direction, Vector3.up);
             _transform.rotation = Quaternion.RotateTowards(_transform.rotation, _rotation, _rotationSpeed);
         }
-
     }
 
     private void OnDisable()

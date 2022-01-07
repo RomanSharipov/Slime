@@ -6,6 +6,7 @@ using UnityEngine.Events;
 [RequireComponent(typeof(PlayerInput))]
 [RequireComponent(typeof(PlayerMovement))]
 [RequireComponent(typeof(PlayerAnimator))]
+[RequireComponent(typeof(UpgradingSlime))]
 public class Player : MonoBehaviour
 {
     [SerializeField] private ParticleSystem _blot;

@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(BoxCollider))]
 public class Item : MonoBehaviour
 {
     [SerializeField] private int _requiredLevel;
     [SerializeField] private float _destroyPositionY;
     [SerializeField] private float _speedDrown;
-    [SerializeField] private Vector3 _targetScale;
+
+    [SerializeField] private float _forceReduceScale = 0.8f;
     [SerializeField] private float _speedReduceScale;
 
     public int RequiredLevel => _requiredLevel;
@@ -39,8 +41,7 @@ public class Item : MonoBehaviour
         }
     }
 
-
-    public void Die(Player player)
+    public virtual void Die(Player player)
     {
         _transform.parent = player.Transform;
     }
@@ -48,13 +49,14 @@ public class Item : MonoBehaviour
     public IEnumerator Drown(Player player)
     {
         Vector3 targetPosition = new Vector3();
+        Vector3 targetScale = _transform.localScale * _forceReduceScale;
         float targetPositionY;
         while (_transform.position.y > _destroyPositionY)
         {
             targetPositionY = _transform.position.y - Time.deltaTime * _speedDrown;
             targetPosition.Set(player.transform.position.x, targetPositionY, player.transform.position.z);
             _transform.position = Vector3.MoveTowards(_transform.position, targetPosition, Time.deltaTime * _speedDrown);
-            _transform.localScale = Vector3.MoveTowards(_transform.localScale, _targetScale, Time.deltaTime * _speedReduceScale);
+            _transform.localScale = Vector3.MoveTowards(_transform.localScale, targetScale, Time.deltaTime * _speedReduceScale);
             yield return null;
         }
         Destroy(gameObject);
