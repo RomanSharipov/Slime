@@ -6,6 +6,7 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     [SerializeField] private int _requiredLevel;
+    [SerializeField] private int _reward;
     [SerializeField] private float _destroyPositionY;
     [SerializeField] private float _speedDrown;
 
@@ -13,6 +14,7 @@ public class Item : MonoBehaviour
     [SerializeField] private float _speedReduceScale;
 
     public int RequiredLevel => _requiredLevel;
+    public int Reward => _reward;
 
     private Transform _transform;
     private MeshRenderer _meshRenderer;
@@ -27,26 +29,26 @@ public class Item : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out Player player))
+        if (other.TryGetComponent(out Slime slime))
         {
-            player.TryEat(this);
+            slime.TryEat(this);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.TryGetComponent(out Player player))
+        if (other.TryGetComponent(out Slime slime))
         {
             _meshRenderer.material = _startMaterial;
         }
     }
 
-    public virtual void Die(Player player)
+    public virtual void Die(Slime slime)
     {
-        _transform.parent = player.Transform;
+        _transform.parent = slime.Transform;
     }
 
-    public IEnumerator Drown(Player player)
+    public IEnumerator Drown(Slime slime)
     {
         Vector3 targetPosition = new Vector3();
         Vector3 targetScale = _transform.localScale * _forceReduceScale;
@@ -54,7 +56,7 @@ public class Item : MonoBehaviour
         while (_transform.position.y > _destroyPositionY)
         {
             targetPositionY = _transform.position.y - Time.deltaTime * _speedDrown;
-            targetPosition.Set(player.transform.position.x, targetPositionY, player.transform.position.z);
+            targetPosition.Set(slime.transform.position.x, targetPositionY, slime.transform.position.z);
             _transform.position = Vector3.MoveTowards(_transform.position, targetPosition, Time.deltaTime * _speedDrown);
             _transform.localScale = Vector3.MoveTowards(_transform.localScale, targetScale, Time.deltaTime * _speedReduceScale);
             yield return null;

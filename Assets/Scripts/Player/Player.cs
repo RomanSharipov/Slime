@@ -6,30 +6,27 @@ using UnityEngine.Events;
 [RequireComponent(typeof(PlayerInput))]
 [RequireComponent(typeof(PlayerMovement))]
 [RequireComponent(typeof(PlayerAnimator))]
-[RequireComponent(typeof(UpgradingSlime))]
-public class Player : MonoBehaviour
+[RequireComponent(typeof(Slime))]
+
+public class Player : MonoBehaviour, ICountable
 {
-    [SerializeField] private ParticleSystem _blot;
-    [SerializeField] private Transform _blotSpawnPoint;
-    [SerializeField] private float _delayBetweenSpawnBlot;
     [SerializeField] private int _score;
-    [SerializeField] private Material _transparentMaterial;
 
     private PlayerInput _playerInput;
     private PlayerMovement _playerMovement;
     private PlayerAnimator _playerAnimator;
+    private Slime _slime;
     private Transform _transform;
-    private UpgradingSlime _upgradingSlime;
-    private float _lastSpawnTime;
 
+    public int Score => _score;
     public PlayerInput PlayerInput => _playerInput;
     public PlayerMovement PlayerMovement => _playerMovement;
     public PlayerAnimator PlayerAnimator => _playerAnimator;
-    public UpgradingSlime UpgradingSlime => _upgradingSlime;
+    public Slime Slime => _slime;
+    
     public Transform Transform => _transform;
     public Vector3 CurrentPosition => _transform.position;
 
-    public event UnityAction SlimeWasUpgraded;
 
     public void Init()
     {
@@ -39,43 +36,20 @@ public class Player : MonoBehaviour
         _playerMovement.Init();
         _playerAnimator = GetComponent<PlayerAnimator>();
         _playerAnimator.Init();
-        _upgradingSlime = GetComponent<UpgradingSlime>();
-        _upgradingSlime.Init();
-        _playerInput.Walked += TryCreateBlot;
+        _slime = GetComponent<Slime>();
+        _slime.Init();
+        _slime.ItemWasEaten += AddScore;
+        _playerInput.Walked += _slime.TryCreateBlot;
     }
 
-    private void TryCreateBlot(Vector2 direction)
+    public void AddScore(Item item)
     {
-        if (_lastSpawnTime <= 0)
-        {
-            ParticleSystem blot = Instantiate(_blot, _transform);
-            blot.transform.parent = null;
-            blot.transform.position = _blotSpawnPoint.position;
-            _lastSpawnTime = _delayBetweenSpawnBlot;
-        }
-        _lastSpawnTime -= Time.deltaTime;
+        _score += item.Reward;
     }
 
-    public void TryEat(Item item)
+    private void OnDisable()
     {
-        if (_upgradingSlime.LevelSlime >= item.RequiredLevel)
-        {
-            Eat(item);
-            _score++;
-            if (_score % UpgradingSlime.CountScoreForUpgrade == 0)
-            {
-                SlimeWasUpgraded?.Invoke();
-            }
-        }
-        else
-        {
-            item.SetTransparentMaterial(_transparentMaterial);
-        }
-    }
-
-    private void Eat(Item item)
-    {
-        item.Die(this);
-        StartCoroutine(item.Drown(this));
+        _slime.ItemWasEaten -= AddScore;
+        _playerInput.Walked -= _slime.TryCreateBlot;
     }
 }

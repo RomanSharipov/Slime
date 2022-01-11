@@ -20,7 +20,7 @@ public class PlayerCamera : MonoBehaviour
         _transform = GetComponent<Transform>();
         offsetZ = _transform.position.z - _player.CurrentPosition.z;
         heightY = _transform.position.y - _player.CurrentPosition.y;
-        _player.SlimeWasUpgraded += UpdatePositionCamera;
+        _player.Slime.SlimeWasUpgraded += UpdatePositionCamera;
     }
 
     private void Update()
