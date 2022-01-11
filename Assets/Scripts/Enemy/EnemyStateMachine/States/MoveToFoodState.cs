@@ -6,6 +6,10 @@ public class MoveToFoodState : State
 {
 
     [SerializeField] private float _speed;
+    [SerializeField] private float _rotationSpeed;
+
+    private Quaternion _targetRotation;
+    private Vector3 _direction = new Vector3();
 
     private void Awake()
     {
@@ -16,7 +20,9 @@ public class MoveToFoodState : State
     {
         if (Target != null)
         {
-            _transform.LookAt(new Vector3(Target.transform.position.x, transform.position.y, Target.transform.position.z));
+            _direction = Target.position - _transform.position;
+            _targetRotation = Quaternion.LookRotation(_direction);
+            _transform.rotation = Quaternion.Lerp(_transform.rotation, _targetRotation, _rotationSpeed*Time.deltaTime);
             _transform.position = Vector3.MoveTowards(transform.position, new Vector3(Target.transform.position.x, transform.position.y, Target.transform.position.z), _speed * Time.deltaTime);
 
         }

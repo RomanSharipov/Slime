@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour, ICountable
 
     private UpgradingSlime _upgradingSlime;
     private Slime _slime;
+    private Vector2 _direction = new Vector2();
 
     public Player Target => _target; 
     public UpgradingSlime UpgradingSlime => _upgradingSlime; 
@@ -25,6 +26,11 @@ public class Enemy : MonoBehaviour, ICountable
         _slime = GetComponent<Slime>();
         _slime.Init();
         _slime.ItemWasEaten += AddScore;
+    }
+
+    private void Update()
+    {
+        _slime.TryCreateBlot(_direction);
     }
 
     private void AddScore(Item item)

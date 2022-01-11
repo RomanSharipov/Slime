@@ -5,7 +5,7 @@ using UnityEngine;
 public class FoodNeardlyTransition : Transition
 {
     [SerializeField] private int _distanceToFood;
-    private List<Item> _itemsNeardly;
+    private List<Item> _itemsNeardly = new List<Item>();
 
     private void Update()
     {
