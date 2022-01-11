@@ -19,9 +19,11 @@ public class Item : MonoBehaviour
     private Transform _transform;
     private MeshRenderer _meshRenderer;
     private Material _startMaterial;
+    private BoxCollider _boxCollider;
 
     private void Start()
     {
+        _boxCollider = GetComponent<BoxCollider>();
         _transform = GetComponent<Transform>();
         _meshRenderer = GetComponent<MeshRenderer>();
         _startMaterial = GetComponent<MeshRenderer>().material;
@@ -45,6 +47,7 @@ public class Item : MonoBehaviour
 
     public virtual void Die(Slime slime)
     {
+        _boxCollider.enabled = false;
         _transform.parent = slime.Transform;
     }
 

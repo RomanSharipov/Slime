@@ -19,9 +19,12 @@ public class FoodNeardlyTransition : Transition
             {
                 if (Enemy.UpgradingSlime.LevelSlime >= item.RequiredLevel)
                 {
-                    _enemyStateMachine.SetTarget(item.transform);
-                    SwitchOnTransition();
-                    return;
+                    if (item != null)
+                    {
+                        _enemyStateMachine.SetTarget(item.transform);
+                        SwitchOnTransition();
+                        return;
+                    }
                 }
             }
         }
