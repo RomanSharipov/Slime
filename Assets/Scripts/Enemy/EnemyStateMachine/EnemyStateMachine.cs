@@ -6,15 +6,21 @@ public class EnemyStateMachine : MonoBehaviour
     [SerializeField] private State _firstState;
     [SerializeField] private State _currentState;
 
-    private Transform _target;
-    private float _previousFramePosition;
+    private Enemy _enemy;
+    private State[] _states;
 
     public State Current => _currentState;
 
-    private void Awake()
+    public void Init()
     {
-        _target = GetComponent<Enemy>().Target.transform;
+        _enemy = GetComponent<Enemy>();
         Reset(_firstState);
+        _states = GetComponents<State>();
+
+        foreach (var state in _states)
+        {
+            state.Init();
+        }
     }
 
     private void Update()
@@ -38,7 +44,7 @@ public class EnemyStateMachine : MonoBehaviour
 
         if (_currentState != null)
         {
-            _currentState.Enter(_target);
+            _currentState.Enter(_enemy.Target);
         }
     }
 
@@ -52,12 +58,7 @@ public class EnemyStateMachine : MonoBehaviour
 
         if (_currentState != null)
         {
-            _currentState.Enter(_target);
+            _currentState.Enter(_enemy.Target);
         }
-    }
-
-    public void SetTarget(Transform target)
-    {
-        _target = target;
     }
 }

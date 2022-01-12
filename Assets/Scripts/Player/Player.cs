@@ -38,7 +38,6 @@ public class Player : MonoBehaviour, ICountable
         _playerAnimator.Init();
         _slime = GetComponent<Slime>();
         _slime.Init();
-        _slime.ItemWasEaten += AddScore;
         _playerInput.Walked += _slime.TryCreateBlot;
     }
 
@@ -49,7 +48,6 @@ public class Player : MonoBehaviour, ICountable
 
     private void OnDisable()
     {
-        _slime.ItemWasEaten -= AddScore;
         _playerInput.Walked -= _slime.TryCreateBlot;
     }
 }

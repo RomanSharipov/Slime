@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class FoodAwayTransition : Transition
 {
-    [SerializeField] private int _distanceToFood;
+    private List<Item> _availableItems = new List<Item>();
 
     private void Update()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(Enemy.transform.position, _distanceToFood, Enemy.LayerMask);
-        if (hitColliders.Length == 0)
+        _availableItems = Enemy.GetNearbyAvailableItems();
+        if (_availableItems.Count == 0)
             SwitchOnTransition();
     }
 }

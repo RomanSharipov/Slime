@@ -9,17 +9,16 @@ public class Item : MonoBehaviour
     [SerializeField] private int _reward;
     [SerializeField] private float _destroyPositionY;
     [SerializeField] private float _speedDrown;
-
     [SerializeField] private float _forceReduceScale = 0.8f;
     [SerializeField] private float _speedReduceScale;
-
-    public int RequiredLevel => _requiredLevel;
-    public int Reward => _reward;
 
     private Transform _transform;
     private MeshRenderer _meshRenderer;
     private Material _startMaterial;
     private BoxCollider _boxCollider;
+
+    public int RequiredLevel => _requiredLevel;
+    public int Reward => _reward;
 
     private void Start()
     {

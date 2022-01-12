@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Player))]
+[RequireComponent(typeof(Animator))]
 public class PlayerAnimator : MonoBehaviour
 {
     private const string Walk = "Walk";

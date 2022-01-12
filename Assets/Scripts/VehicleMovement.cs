@@ -8,6 +8,7 @@ public class VehicleMovement : MonoBehaviour
     [SerializeField] private PathCreator _pathCreator;
     [SerializeField] private float _speed;
     [SerializeField] private float _distanceTraveled;
+
     private Transform _transform;
 
     private void Start()

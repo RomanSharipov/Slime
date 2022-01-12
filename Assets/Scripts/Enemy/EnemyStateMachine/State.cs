@@ -1,20 +1,21 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Enemy))]
 public abstract class State : MonoBehaviour
 {
-    protected Animator _animator;
     protected Transform _transform;
+    protected Enemy _enemy;
 
     [SerializeField] private List<Transition> _transitions;
 
     public Transform Target { get; protected set; }
+    public Enemy Enemy => _enemy;
 
-    private void Awake()
+    public void Init()
     {
-        _animator = GetComponent<Animator>();
         _transform = GetComponent<Transform>();
+        _enemy = GetComponent<Enemy>();
     }
 
     public void Enter(Transform target)
@@ -27,7 +28,6 @@ public abstract class State : MonoBehaviour
             foreach (var transition in _transitions)
             {
                 transition.enabled = true;
-
                 transition.Init(Target);
             }
         }

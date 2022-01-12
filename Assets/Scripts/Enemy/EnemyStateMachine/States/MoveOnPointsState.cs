@@ -4,10 +4,10 @@ public class MoveOnPointsState : State
 {
     [SerializeField] private Transform _path;
     [SerializeField] private int _speed;
+    [SerializeField] private float _rotationSpeed;
 
     private Transform[] _points;
     private int _currentPoint;
-    private float _previousFramePosition;
 
     private void Start()
     {
@@ -19,18 +19,13 @@ public class MoveOnPointsState : State
         }
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        MoveOnPoint();
-    }
+        Transform targetPoint = _points[_currentPoint];
 
-    private void MoveOnPoint()
-    {
-        Transform _target = _points[_currentPoint];
-        _transform.position = Vector3.MoveTowards(_transform.position, new Vector3(_target.position.x, _transform.position.y, _target.position.z), _speed * Time.deltaTime);
-        _transform.LookAt(new Vector3(_target.position.x, _transform.position.y, _target.position.z));
+        Enemy.EnemyMovement.MoveTo(targetPoint.position, _speed, _rotationSpeed);
 
-        if (_transform.position.x == _target.position.x && _transform.position.z == _target.position.z)
+        if (_transform.position.x == targetPoint.position.x && _transform.position.z == targetPoint.position.z)
         {
             _currentPoint++;
             if (_currentPoint == _points.Length)

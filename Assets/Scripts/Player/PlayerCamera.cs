@@ -5,15 +5,13 @@ using UnityEngine;
 public class PlayerCamera : MonoBehaviour
 {
     [SerializeField] private Player _player;
-
-    private Transform _transform;
     [SerializeField] private float heightY;
     [SerializeField] private float offsetZ;
     [SerializeField] private float _stepOffsetZ;
     [SerializeField] private float _stepHeightY;
     [SerializeField] private float _speedUpdatePosition;
 
-    private Coroutine _coroutine;
+    private Transform _transform;
 
     public void Init()
     {
@@ -44,5 +42,10 @@ public class PlayerCamera : MonoBehaviour
             heightY = Mathf.MoveTowards(heightY, targetPositionY, Time.deltaTime * _speedUpdatePosition);
             yield return null;
         }
+    }
+
+    private void OnDisable()
+    {
+        _player.Slime.SlimeWasUpgraded -= UpdatePositionCamera;
     }
 }
