@@ -12,9 +12,9 @@ public class Vehicle : Item
         _vehicleMovement = GetComponent<VehicleMovement>();
     }
 
-    public override void Die(Slime slime)
+    public override void BeEaten(Slime slime)
     {
         _vehicleMovement.enabled = false;
-        base.Die(slime);
+        base.BeEaten(slime);
     }
 }

@@ -11,6 +11,7 @@ using UnityEngine.Events;
 public class Player : MonoBehaviour, ICountable
 {
     [SerializeField] private int _score;
+    [SerializeField] private int _countScoreForUpgrade;
 
     private PlayerInput _playerInput;
     private PlayerMovement _playerMovement;
@@ -19,6 +20,7 @@ public class Player : MonoBehaviour, ICountable
     private Transform _transform;
 
     public int Score => _score;
+    public int CountScoreForUpgrade => _countScoreForUpgrade;
     public PlayerInput PlayerInput => _playerInput;
     public PlayerMovement PlayerMovement => _playerMovement;
     public PlayerAnimator PlayerAnimator => _playerAnimator;
@@ -27,7 +29,7 @@ public class Player : MonoBehaviour, ICountable
     public Transform Transform => _transform;
     public Vector3 CurrentPosition => _transform.position;
 
-
+    public event UnityAction<int> AddedScore;
     public void Init()
     {
         _transform = GetComponent<Transform>();
@@ -41,13 +43,20 @@ public class Player : MonoBehaviour, ICountable
         _playerInput.Walked += _slime.TryCreateBlot;
     }
 
-    public void AddScore(Item item)
+    public void AddScore(int reward)
     {
-        _score += item.Reward;
+        _countScoreForUpgrade++;
+        _score += reward;
+        AddedScore?.Invoke(reward);
     }
 
     private void OnDisable()
     {
         _playerInput.Walked -= _slime.TryCreateBlot;
+    }
+
+    public void ResetCountScoreForUpgrade()
+    {
+        _countScoreForUpgrade = 0;
     }
 }

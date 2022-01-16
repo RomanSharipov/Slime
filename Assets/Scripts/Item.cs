@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider))]
-public class Item : MonoBehaviour
+[RequireComponent(typeof(MeshRenderer))]
+public class Item : MonoBehaviour, IEatable
 {
     [SerializeField] private int _requiredLevel;
     [SerializeField] private int _reward;
@@ -11,6 +12,7 @@ public class Item : MonoBehaviour
     [SerializeField] private float _speedDrown;
     [SerializeField] private float _forceReduceScale = 0.8f;
     [SerializeField] private float _speedReduceScale;
+    [SerializeField] private Material _transparentMaterial;
 
     private Transform _transform;
     private MeshRenderer _meshRenderer;
@@ -28,14 +30,6 @@ public class Item : MonoBehaviour
         _startMaterial = GetComponent<MeshRenderer>().material;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.TryGetComponent(out Slime slime))
-        {
-            slime.TryEat(this);
-        }
-    }
-
     private void OnTriggerExit(Collider other)
     {
         if (other.TryGetComponent(out Slime slime))
@@ -44,14 +38,9 @@ public class Item : MonoBehaviour
         }
     }
 
-    public virtual void Die(Slime slime)
-    {
-        _boxCollider.enabled = false;
-        _transform.parent = slime.Transform;
-    }
-
     public IEnumerator Drown(Slime slime)
     {
+        
         Vector3 targetPosition = new Vector3();
         Vector3 targetScale = _transform.localScale * _forceReduceScale;
         float targetPositionY;
@@ -69,5 +58,18 @@ public class Item : MonoBehaviour
     public void SetTransparentMaterial(Material material)
     {
         _meshRenderer.material = material;
+    }
+
+    public virtual void BeEaten(Slime slime)
+    {
+        
+        _boxCollider.enabled = false;
+        _transform.parent = slime.Transform;
+        StartCoroutine(Drown(slime));
+    }
+
+    public void BeNotEaten(Slime slime)
+    {
+        _meshRenderer.material = _transparentMaterial;
     }
 }

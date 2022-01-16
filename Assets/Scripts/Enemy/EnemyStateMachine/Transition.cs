@@ -6,12 +6,14 @@ public abstract class Transition : MonoBehaviour
     [SerializeField] private State _targetState;
 
     protected bool _needTransit;
-    protected Transform Target { get; private set; }
-    protected Enemy _enemy { get; private set; }
+    protected Enemy _enemy;
+    protected Player _player;
 
+    protected Transform Target { get; private set; }
     public State TargetState => _targetState;
     public bool NeedTransit => _needTransit;
     public Enemy Enemy => _enemy;
+    public Player Player => _player;
 
     protected void SwitchOnTransition()
     {
@@ -22,6 +24,7 @@ public abstract class Transition : MonoBehaviour
     {
         _needTransit = false;
         _enemy = GetComponent<Enemy>();
+        _player = _enemy.Player;
         Target = target;
     }
 }

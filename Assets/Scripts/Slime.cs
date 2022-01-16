@@ -3,19 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Slime : MonoBehaviour
+public class Slime : MonoBehaviour,IEatable
 {
-    [SerializeField] private ParticleSystem _blot;
-    [SerializeField] private Transform _blotSpawnPoint;
+    [SerializeField] private ParticleSystem _blotTemplate;
+    [SerializeField] private ParticleSystem _destroySplashTemplate;
+    [SerializeField] private Transform _splashSpawnPoint;
     [SerializeField] private float _delayBetweenSpawnBlot;
-    [SerializeField] private Material _transparentMaterial;
+    [SerializeField] private LayerMask _groundLayerMask;
+    [SerializeField] private float _offsetOnGround;
 
     private float _lastSpawnTime;
     private Transform _transform;
     private UpgradingSlime _upgradingSlime;
     private ICountable _countable;
+    private Vector3 _blotSpawnPointPosition = new Vector3();
 
     public Transform Transform => _transform;
+    public int RequiredLevel => _upgradingSlime.LevelSlime;
+    public int Reward => _upgradingSlime.LevelSlime;
+    public UpgradingSlime UpgradingSlime => _upgradingSlime;
+
     public event UnityAction SlimeWasUpgraded;
     public event UnityAction ItemWasEaten;
 
@@ -31,35 +38,60 @@ public class Slime : MonoBehaviour
     {
         if (_lastSpawnTime <= 0)
         {
-            ParticleSystem blot = Instantiate(_blot, _transform);
-            blot.transform.parent = null;
-            blot.transform.position = _blotSpawnPoint.position;
-            _lastSpawnTime = _delayBetweenSpawnBlot;
+            Ray ray = new Ray(transform.position, -transform.up);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, _groundLayerMask))
+            {
+                _blotSpawnPointPosition = new Vector3( hit.point.x,hit.point.y + _offsetOnGround, hit.point.z);
+                ParticleSystem blot = Instantiate(_blotTemplate, _transform);
+                
+                blot.transform.parent = null;
+                blot.transform.position = _blotSpawnPointPosition;
+                _lastSpawnTime = _delayBetweenSpawnBlot;
+            }
         }
         _lastSpawnTime -= Time.deltaTime;
     }
 
-    public void TryEat(Item item)
+    public void TryEat(IEatable eatable)
     {
-        if (_upgradingSlime.LevelSlime >= item.RequiredLevel)
+        
+        if (_upgradingSlime.LevelSlime > eatable.RequiredLevel)
         {
-            Eat(item);
-            _countable.AddScore(item);
+            eatable.BeEaten(this);
+            _countable.AddScore(eatable.Reward);
             ItemWasEaten?.Invoke();
-            if (_countable.Score % UpgradingSlime.CountScoreForUpgrade == 0)
+            if (_countable.CountScoreForUpgrade == UpgradingSlime.CountScoreForUpgrade)
             {
                 SlimeWasUpgraded?.Invoke();
+                _countable.ResetCountScoreForUpgrade();
             }
         }
         else
         {
-            item.SetTransparentMaterial(_transparentMaterial);
+            eatable.BeNotEaten(this);
         }
     }
 
-    private void Eat(Item item)
+    private void OnTriggerEnter(Collider other)
     {
-        item.Die(this);
-        StartCoroutine(item.Drown(this));
+        if (other.TryGetComponent(out IEatable eatable))
+        {
+            TryEat(eatable);
+        }
+    }
+
+    public void BeEaten(Slime slime)
+    {
+        ParticleSystem splash = Instantiate(_destroySplashTemplate, _transform);
+        splash.gravityModifier = _transform.localScale.x;
+        splash.transform.parent = null;
+        splash.transform.position = _splashSpawnPoint.position;
+        Destroy(gameObject);
+    }
+
+    public void BeNotEaten(Slime slime)
+    {
+        
     }
 }

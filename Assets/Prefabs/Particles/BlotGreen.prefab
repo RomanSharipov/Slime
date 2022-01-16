@@ -220,9 +220,9 @@ ParticleSystem:
         m_RotationOrder: 4
     startColor:
       serializedVersion: 2
-      minMaxState: 2
-      minColor: {r: 0.19723403, g: 1, b: 0, a: 1}
-      maxColor: {r: 0.6492772, g: 1, b: 0, a: 1}
+      minMaxState: 0
+      minColor: {r: 0.2924528, g: 0, b: 0.23850511, a: 1}
+      maxColor: {r: 0.1942594, g: 1, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -984,29 +984,20 @@ ParticleSystem:
         - serializedVersion: 3
           time: 0
           value: 1
-          inSlope: -0.6862484
-          outSlope: -0.6862484
+          inSlope: -1
+          outSlope: -1
           tangentMode: 34
           weightedMode: 0
           inWeight: 0
-          outWeight: 0.33333334
+          outWeight: 0
         - serializedVersion: 3
-          time: 0.9168468
-          value: 0.37081534
-          inSlope: -2.8040476
-          outSlope: -2.8040476
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 0.9921875
+          time: 1
           value: 0
-          inSlope: -4.921847
-          outSlope: -4.921847
+          inSlope: -1
+          outSlope: -1
           tangentMode: 34
           weightedMode: 0
-          inWeight: 0.33333334
+          inWeight: 0
           outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2

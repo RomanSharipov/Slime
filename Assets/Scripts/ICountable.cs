@@ -1,5 +1,6 @@
 public interface ICountable 
 {
-    int Score { get; }
-    void AddScore(Item eatenItem );
+    int CountScoreForUpgrade { get; }
+    void AddScore(int score);
+    void ResetCountScoreForUpgrade();
 }
