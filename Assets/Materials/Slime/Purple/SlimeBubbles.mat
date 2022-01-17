@@ -21,9 +21,10 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: SlimeBubbles
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: TCP2_REFLECTIONS_FRESNEL TCP2_RIM_LIGHTING_LIGHTMASK TCP2_UV_NORMALS_FULL
-    _ENVIRONMENTREFLECTIONS_OFF _GLOSSYREFLECTIONS_OFF _SPECULAR_SETUP
+  m_Shader: {fileID: 4800000, guid: ccfc7d68845db8341944b3091b59be55, type: 3}
+  m_ShaderKeywords: TCP2_DISABLE_WRAPPED_LIGHT TCP2_RAMPTEXT TCP2_REFLECTIONS_FRESNEL
+    TCP2_RIM_LIGHTING_LIGHTMASK TCP2_UV_NORMALS_FULL _CELPRIMARYMODE_STEPS _ENVIRONMENTREFLECTIONS_OFF
+    _GLOSSYREFLECTIONS_OFF _SPECULAR_SETUP _TEXTUREBLENDINGMODE_MULTIPLY _UNITYSHADOWMODE_NONE
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -39,6 +40,14 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CelCurveTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CelStepTexture:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -83,7 +92,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Ramp:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: abc83c21d57d4a74cabe12065fa1a8b2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ReflectionTex:
@@ -119,6 +128,9 @@ Material:
     - _CameraFadingEnabled: 0
     - _CameraFarFadeDistance: 2
     - _CameraNearFadeDistance: 1
+    - _CelExtraEnabled: 0
+    - _CelNumSteps: 1
+    - _CelPrimaryMode: 2
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _ColorMode: 0
@@ -134,23 +146,41 @@ Material:
     - _DstBlend: 0
     - _EmissionChannel: 4
     - _EmissionEnabled: 0
+    - _EnableHeightBlend: 0
     - _EnvironmentReflections: 0
+    - _FlatRimEdgeSmoothness: 0.5
+    - _FlatRimLightAlign: 0
+    - _FlatRimSize: 0.5
+    - _FlatSpecularEdgeSmoothness: 0
+    - _FlatSpecularSize: 0.1
+    - _Flatness: 1
+    - _FlatnessExtra: 1
     - _FlipbookMode: 0
     - _FresnelMax: 1.5
     - _FresnelMin: 0
     - _GlossMapScale: 0
     - _Glossiness: 0.795
     - _GlossyReflections: 0
+    - _GradientAngle: 0
+    - _GradientCenterX: 0
+    - _GradientCenterY: 0
+    - _GradientEnabled: 0
+    - _GradientSize: 10
+    - _HeightTransition: 0
     - _IndirectIntensity: 1
     - _IndirectIntensityOutline: 0
     - _InvFade: 1
+    - _LightContribution: 0
     - _LightingEnabled: 1
+    - _LightmapDirectionPitch: 0
+    - _LightmapDirectionYaw: 0
     - _MatCapMaskChannel: 0
     - _MatCapType: 0
     - _Metallic: 0.62
     - _Mode: 0
     - _NormalsSource: 0
     - _NormalsUVType: 0
+    - _NumLayersCount: 1
     - _OcclusionChannel: 0
     - _OcclusionStrength: 1
     - _OutlineLightingType: 0
@@ -160,12 +190,14 @@ Material:
     - _OutlineTextureLOD: 5
     - _OutlineTextureType: 0
     - _OutlineWidth: 1
+    - _OverrideLightmapDir: 0
     - _Parallax: 0.005
     - _QueueOffset: 0
     - _RampBands: 4
     - _RampBandsSmoothing: 0.1
     - _RampOffset: 0
     - _RampScale: 1
+    - _RampSmooth: 0.01
     - _RampSmoothing: 0.1
     - _RampThreshold: 0.75
     - _RampType: 0
@@ -174,14 +206,20 @@ Material:
     - _ReflectionMapType: 0
     - _ReflectionSmoothness: 0.5
     - _RenderingMode: 0
+    - _RimEnabled: 0
     - _RimMax: 1
     - _RimMin: 0.5
+    - _SelfShadingSize: 0.5
+    - _SelfShadingSizeExtra: 0.6
+    - _ShadowEdgeSize: 0.05
+    - _ShadowEdgeSizeExtra: 0.05
     - _SingleIndirectColor: 0
     - _Smoothness: 0.4
     - _SmoothnessTextureChannel: 0
     - _SoftParticlesEnabled: 0
     - _SoftParticlesFarFadeDistance: 1
     - _SoftParticlesNearFadeDistance: 0
+    - _SpecularEnabled: 0
     - _SpecularHighlights: 1
     - _SpecularMapType: 0
     - _SpecularRoughness: 0.5
@@ -190,7 +228,12 @@ Material:
     - _SpecularType: 0
     - _SrcBlend: 1
     - _Surface: 1
+    - _TextureBlendingMode: 0
+    - _TextureImpact: 1
     - _UVSec: 0
+    - _UnityShadowMode: 0
+    - _UnityShadowPower: 0.2
+    - _UnityShadowSharpness: 1
     - _UseAlphaTest: 0
     - _UseEmission: 0
     - _UseFresnelReflections: 1
@@ -205,15 +248,24 @@ Material:
     - _UseRimLightMask: 1
     - _UseShadowTexture: 0
     - _UseSpecular: 0
+    - _VertexColorsEnabled: 0
     - _WorkflowMode: 0
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 0.24146047, g: 0, b: 0.4339623, a: 0.7176471}
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
-    - _Color: {r: 0.1254902, g: 0, b: 0.16078432, a: 1}
+    - _Color: {r: 0.22825591, g: 0, b: 0.2924528, a: 1}
     - _ColorAddSubDiff: {r: 1, g: 0, b: 0, a: 0}
+    - _ColorDim: {r: 0.1254902, g: 0, b: 0.16078432, a: 1}
+    - _ColorDimCurve: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}
+    - _ColorDimExtra: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}
+    - _ColorDimSteps: {r: 0.1254902, g: 0, b: 0.16078432, a: 1}
+    - _ColorGradient: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}
     - _EmissionColor: {r: 0.33589062, g: 0.6792453, b: 0, a: 1}
+    - _FlatRimColor: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}
+    - _FlatSpecularColor: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}
     - _HColor: {r: 1, g: 1, b: 1, a: 1}
+    - _LightmapDirection: {r: 0, g: 1, b: 0, a: 0}
     - _MatCapColor: {r: 1, g: 1, b: 1, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _ReflectionColor: {r: 1, g: 1, b: 1, a: 1}
@@ -223,4 +275,5 @@ Material:
     - _SpecColor: {r: 0.5381461, g: 0.7735849, b: 0, a: 1}
     - _SpecularColor: {r: 0.75, g: 0.75, b: 0.75, a: 1}
     - _TintColor: {r: 0, g: 0, b: 0, a: 0.5372549}
+    - _UnityShadowColor: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}
   m_BuildTextureStacks: []

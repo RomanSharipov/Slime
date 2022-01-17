@@ -10,7 +10,12 @@ public class PlayerInput : MonoBehaviour
     public event UnityAction<Vector2> Walked;
     public event UnityAction Stopped;
 
-    private Vector2 _direction;
+    private Vector2 _direction = new Vector2();
+
+    public void Init(Joystick joystick)
+    {
+        _joystick = joystick;
+    }
 
     private void Update()
     {

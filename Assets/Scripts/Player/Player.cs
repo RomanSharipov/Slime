@@ -30,10 +30,13 @@ public class Player : MonoBehaviour, ICountable
     public Vector3 CurrentPosition => _transform.position;
 
     public event UnityAction<int> AddedScore;
-    public void Init()
+    public event UnityAction Died;
+
+    public void Init(Joystick joystick)
     {
         _transform = GetComponent<Transform>();
         _playerInput = GetComponent<PlayerInput>();
+        _playerInput.Init(joystick);
         _playerMovement = GetComponent<PlayerMovement>();
         _playerMovement.Init();
         _playerAnimator = GetComponent<PlayerAnimator>();
@@ -58,5 +61,10 @@ public class Player : MonoBehaviour, ICountable
     public void ResetCountScoreForUpgrade()
     {
         _countScoreForUpgrade = 0;
+    }
+
+    private void OnDestroy()
+    {
+        Died?.Invoke();
     }
 }

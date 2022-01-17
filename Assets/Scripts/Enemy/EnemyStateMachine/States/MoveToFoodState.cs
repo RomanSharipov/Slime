@@ -9,9 +9,11 @@ public class MoveToFoodState : State
 
     private void Update()
     {
-        if (Target != null)
-        {
-            Enemy.EnemyMovement.MoveTo(Target.position, _speed, _rotationSpeed);
-        }
+        if (Enemy.Target == null)
+            Enemy.EnemyDetectorFood.SetNearbyRandomTarget();
+
+        if (Enemy.Target == null)
+            return;
+        Enemy.EnemyMovement.MoveTo(Enemy.Target.position, _speed, _rotationSpeed);
     }
 }

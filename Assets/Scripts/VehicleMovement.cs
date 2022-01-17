@@ -5,14 +5,15 @@ using PathCreation;
 
 public class VehicleMovement : MonoBehaviour
 {
-    [SerializeField] private PathCreator _pathCreator;
     [SerializeField] private float _speed;
     [SerializeField] private float _distanceTraveled;
 
+    private PathCreator _pathCreator;
     private Transform _transform;
 
-    private void Start()
+    public void Init(PathCreator pathCreator)
     {
+        _pathCreator = pathCreator;
         _transform = GetComponent<Transform>();
     }
 

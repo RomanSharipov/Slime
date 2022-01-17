@@ -9,8 +9,9 @@ public class MoveOnPointsState : State
     private Transform[] _points;
     private int _currentPoint;
 
-    private void Start()
+    public void InitPath(Transform path)
     {
+        _path = path;
         _points = new Transform[_path.childCount];
 
         for (int i = 0; i < _path.childCount; i++)
@@ -18,7 +19,7 @@ public class MoveOnPointsState : State
             _points[i] = _path.GetChild(i);
         }
     }
-
+    
     private void Update()
     {
         Transform targetPoint = _points[_currentPoint];

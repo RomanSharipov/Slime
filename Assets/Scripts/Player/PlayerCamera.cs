@@ -13,9 +13,12 @@ public class PlayerCamera : MonoBehaviour
 
     private Transform _transform;
 
-    public void Init()
+    public void Init(Transform startPoint,Player player)
     {
         _transform = GetComponent<Transform>();
+        _player = player;
+        _transform.position = startPoint.position;
+        _transform.rotation = startPoint.rotation;
         offsetZ = _transform.position.z - _player.CurrentPosition.z;
         heightY = _transform.position.y - _player.CurrentPosition.y;
         _player.Slime.SlimeWasUpgraded += UpdatePositionCamera;
@@ -23,6 +26,8 @@ public class PlayerCamera : MonoBehaviour
 
     private void Update()
     {
+        if (_player == null)
+            return;
         _transform.position = new Vector3(_player.CurrentPosition.x, heightY, _player.CurrentPosition.z + offsetZ);
     }
 

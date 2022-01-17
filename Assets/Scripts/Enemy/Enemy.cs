@@ -19,15 +19,14 @@ public class Enemy : MonoBehaviour, ICountable
 
     private Transform _randomItem;
     private Transform _transform;
-    private UpgradingSlime _upgradingSlime;
     private Slime _slime;
     private Vector2 _direction = new Vector2();
     private EnemyMovement _enemyMovement;
     private EnemyStateMachine _enemyStateMachine;
     private EnemyDetectorFood _enemyDetectorFood;
+    private MoveOnPointsState _moveOnPointsState;
 
-    public Transform Target => _target; 
-    public UpgradingSlime UpgradingSlime => _upgradingSlime; 
+    public Transform Target => _target;
     public Slime Slime => _slime;
     public int Score => _score;
     public int CountScoreForUpgrade => _countScoreForUpgrade;
@@ -37,8 +36,13 @@ public class Enemy : MonoBehaviour, ICountable
     public EnemyDetectorFood EnemyDetectorFood => _enemyDetectorFood;
     public Player Player => _player;
 
-    private void Awake()
+    public void Init(Player player,Transform path)
     {
+        _moveOnPointsState = GetComponent<MoveOnPointsState>();
+        _moveOnPointsState.InitPath(path);
+        _player = player;
+        _slime = GetComponent<Slime>();
+        _slime.Init();
         _enemyDetectorFood = GetComponent<EnemyDetectorFood>();
         _enemyDetectorFood.Init();
         _transform = GetComponent<Transform>();
@@ -46,10 +50,6 @@ public class Enemy : MonoBehaviour, ICountable
         _enemyStateMachine.Init();
         _enemyMovement = GetComponent<EnemyMovement>();
         _enemyMovement.Init();
-        _upgradingSlime = GetComponent<UpgradingSlime>();
-        _upgradingSlime.Init();
-        _slime = GetComponent<Slime>();
-        _slime.Init();
         _slime.ItemWasEaten += _enemyDetectorFood.SetNearbyRandomTarget;
     }
 
