@@ -6,15 +6,16 @@ using PathCreation;
 public class VehicleMovement : MonoBehaviour
 {
     [SerializeField] private float _speed;
-    [SerializeField] private float _distanceTraveled;
 
+    private float _distanceTraveled;
     private PathCreator _pathCreator;
     private Transform _transform;
 
-    public void Init(PathCreator pathCreator)
+    public void Init(PathCreator pathCreator,float distanceTraveled)
     {
         _pathCreator = pathCreator;
         _transform = GetComponent<Transform>();
+        _distanceTraveled = distanceTraveled;
     }
 
     private void Update()

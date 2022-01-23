@@ -6,16 +6,16 @@ using PathCreation;
 public class Game : MonoBehaviour
 {
     [SerializeField] private Player _playerTemplate;
-    [SerializeField] private PlayerCamera _camera;
     [SerializeField] private Map _mapTemplate;
     [SerializeField] private Enemy _enemyTemplate;
     [SerializeField] private Transform _spawnPointMap;
-    [SerializeField] private Transform _cameraStartPoint;
     [SerializeField] private SpawnerText _spawnerText;
     [SerializeField] private Joystick _joystick;
     [SerializeField] private Vehicle[] _vehiclesTemplate;
-    
+    [SerializeField] private UpdatingPositionCamera _updatingPositionCamera;
+    [SerializeField] private float _distanceBetweenVehicles;
 
+    private float _startDistanceTraveled;
     private Player _player;
     private Map _map;
     private List<Enemy> _enemies = new List<Enemy>();
@@ -30,6 +30,7 @@ public class Game : MonoBehaviour
     {
         DestroyAllObjects();
         StartGame();
+        _updatingPositionCamera.ResetPosition();
     }
 
     public void StartGame()
@@ -38,6 +39,7 @@ public class Game : MonoBehaviour
         _player = Instantiate(_playerTemplate, _map.SpawnPointPlayer.position, _map.SpawnPointPlayer.rotation);
         _player.Init(_joystick);
         _spawnerText.Init(_player);
+        _updatingPositionCamera.Init(_player);
 
         foreach (var spawnPointEnemy in _map.SpawnPointsEnemies)
         {
@@ -46,13 +48,12 @@ public class Game : MonoBehaviour
             _enemies.Add(enemy);
         }
 
-        _camera.Init(_cameraStartPoint, _player);
-
         foreach (var _vehicleTemplate in _vehiclesTemplate)
         {
             Vehicle vehicle = Instantiate(_vehicleTemplate);
-            vehicle.Init(_map.PathCreator);
-            _vehicles.Add(vehicle);  
+            vehicle.Init(_map.PathCreator, _startDistanceTraveled);
+            _vehicles.Add(vehicle);
+            _startDistanceTraveled += _distanceBetweenVehicles;
         }
     }
 

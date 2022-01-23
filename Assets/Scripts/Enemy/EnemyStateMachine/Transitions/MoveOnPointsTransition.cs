@@ -11,19 +11,12 @@ public class MoveOnPointsTransition : Transition
 
     private void Update()
     {
-        if (Enemy.Target == null)
-        {
-            SwitchOnTransition();
-            return;
-        }
-
         if (Enemy.Player != null)
             _playerNearby = Vector3.Distance(transform.position, Enemy.Player.Transform.position) < _distanceToPlayer;
-        if (_playerNearby)
+        if (_playerNearby && Enemy.Slime.UpgradingSlime.LevelSlime > Enemy.Player.Slime.UpgradingSlime.LevelSlime)
             return;
 
-        _availableItems = Enemy.EnemyDetectorFood.GetNearbyAvailableItems();
-        if (_availableItems.Count != 0)
+        if (Enemy.Target != null)
             return;
         SwitchOnTransition();
     }

@@ -8,10 +8,10 @@ public class Vehicle : Item
 {
     private VehicleMovement _vehicleMovement;
 
-    public void Init(PathCreator pathCreator)
+    public void Init(PathCreator pathCreator,float distanceTraveled)
     {
         _vehicleMovement = GetComponent<VehicleMovement>();
-        _vehicleMovement.Init(pathCreator);
+        _vehicleMovement.Init(pathCreator,distanceTraveled);
     }
 
     public override void BeEaten(Slime slime)

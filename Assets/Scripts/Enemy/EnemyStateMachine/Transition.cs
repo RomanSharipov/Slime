@@ -7,7 +7,7 @@ public abstract class Transition : MonoBehaviour
 
     protected bool _needTransit;
     protected Enemy _enemy;
-    protected Transform Target { get; private set; }
+    protected Transform TargetFood { get; private set; }
     public State TargetState => _targetState;
     public bool NeedTransit => _needTransit;
     public Enemy Enemy => _enemy;
@@ -21,6 +21,6 @@ public abstract class Transition : MonoBehaviour
     {
         _needTransit = false;
         _enemy = GetComponent<Enemy>();
-        Target = target;
+        TargetFood = target;
     }
 }

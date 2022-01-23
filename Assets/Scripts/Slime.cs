@@ -53,14 +53,6 @@ public class Slime : MonoBehaviour,IEatable
         _lastSpawnTime -= Time.deltaTime;
     }
 
-    //private void Update()
-    //{
-    //    if (_countable == null)
-    //    {
-    //        Debug.Log("_countable == null");
-    //    }
-    //}
-
     public void TryEat(IEatable eatable)
     {
         

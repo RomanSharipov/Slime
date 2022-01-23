@@ -30,7 +30,7 @@ public class FoodNearbyTransition : Transition
         if (_playerNearby && Enemy.Slime.UpgradingSlime.LevelSlime > Enemy.Player.Slime.UpgradingSlime.LevelSlime)
             return;
 
-        if (Target == null)
+        if (TargetFood == null)
             Enemy.EnemyDetectorFood.SetNearbyRandomTarget();
 
         SwitchOnTransition();
