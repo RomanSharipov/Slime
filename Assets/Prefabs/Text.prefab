@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4796229632701061074}
   - component: {fileID: 940208672288458350}
   - component: {fileID: 1956881735600816204}
+  - component: {fileID: 7947924568544820505}
   m_Layer: 0
   m_Name: Text
   m_TagString: Untagged
@@ -96,6 +97,17 @@ TextMesh:
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
+--- !u!210 &7947924568544820505
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4055262536713127027}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 2
 --- !u!1 &6361985749079728067
 GameObject:
   m_ObjectHideFlags: 0

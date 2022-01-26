@@ -5,12 +5,12 @@ using PathCreation;
 
 public class SpawnerText : MonoBehaviour
 {
-    [SerializeField] private Player _player;
     [SerializeField] private Transform _spawnPoint;
-    [SerializeField] private Camera _camera;
+    [SerializeField] private UnityEngine.Camera _camera;
     [SerializeField] private RewardText _rewardText;
     [SerializeField] private float _delayBeforeDestroy;
 
+    private Player _player;
     private Vector3 _pointNewText = new Vector3();
 
     public void Init(Player player)

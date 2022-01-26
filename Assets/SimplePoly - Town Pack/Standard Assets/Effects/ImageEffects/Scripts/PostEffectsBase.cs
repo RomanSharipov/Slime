@@ -4,7 +4,7 @@ using UnityEngine;
 namespace UnityStandardAssets.ImageEffects
 {
     [ExecuteInEditMode]
-    [RequireComponent (typeof(Camera))]
+    [RequireComponent(typeof(UnityEngine.Camera))]
     public class PostEffectsBase : MonoBehaviour
 	{
         protected bool  supportHDRTextures = true;
@@ -107,7 +107,7 @@ namespace UnityStandardAssets.ImageEffects
             }
 
             if (needDepth)
-                GetComponent<Camera>().depthTextureMode |= DepthTextureMode.Depth;
+                GetComponent<UnityEngine.Camera>().depthTextureMode |= DepthTextureMode.Depth;
 
             return true;
         }

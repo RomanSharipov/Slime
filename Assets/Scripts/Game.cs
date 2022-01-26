@@ -12,7 +12,7 @@ public class Game : MonoBehaviour
     [SerializeField] private SpawnerText _spawnerText;
     [SerializeField] private Joystick _joystick;
     [SerializeField] private Vehicle[] _vehiclesTemplate;
-    [SerializeField] private UpdatingPositionCamera _updatingPositionCamera;
+    [SerializeField] private Camera _camera;
     [SerializeField] private float _distanceBetweenVehicles;
 
     private float _startDistanceTraveled;
@@ -30,7 +30,7 @@ public class Game : MonoBehaviour
     {
         DestroyAllObjects();
         StartGame();
-        _updatingPositionCamera.ResetPosition();
+        _camera.ResetPosition();
     }
 
     public void StartGame()
@@ -39,7 +39,7 @@ public class Game : MonoBehaviour
         _player = Instantiate(_playerTemplate, _map.SpawnPointPlayer.position, _map.SpawnPointPlayer.rotation);
         _player.Init(_joystick);
         _spawnerText.Init(_player);
-        _updatingPositionCamera.Init(_player);
+        _camera.Init(_player);
 
         foreach (var spawnPointEnemy in _map.SpawnPointsEnemies)
         {

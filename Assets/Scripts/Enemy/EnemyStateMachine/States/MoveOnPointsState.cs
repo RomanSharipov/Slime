@@ -28,7 +28,7 @@ public class MoveOnPointsState : State
 
         if (_transform.position.x == targetPoint.position.x && _transform.position.z == targetPoint.position.z)
         {
-            _currentPoint++;
+            _currentPoint = Random.Range(0, _points.Length);
             if (_currentPoint == _points.Length)
             {
                 _currentPoint = 0;

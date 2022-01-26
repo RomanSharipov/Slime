@@ -44,7 +44,7 @@ public class EnemyStateMachine : MonoBehaviour
 
         if (_currentState != null)
         {
-            _currentState.Enter(_enemy.Target);
+            _currentState.Enter();
         }
     }
 
@@ -58,7 +58,7 @@ public class EnemyStateMachine : MonoBehaviour
 
         if (_currentState != null)
         {
-            _currentState.Enter(_enemy.Target);
+            _currentState.Enter();
         }
     }
 }

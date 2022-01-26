@@ -8,14 +8,13 @@ public class UpgradingSlime : MonoBehaviour
     [SerializeField] private float _offsetFromGroundY;
     [SerializeField] private float _speedGrowScale;
     [SerializeField] private int _levelSlime = 1;
-    [SerializeField] private ParticleSystem _levelUpEffectTemplate;
+    [SerializeField] private ParticleSystem _upgradingEffectTemplate;
     [SerializeField] private int _countScoreForUpgrade;
     [SerializeField] private int _frequencyFactorUpgradingSlime;
 
     private Vector3 _targetScale = new Vector3();
     private Slime _slime;
     public int LevelSlime => _levelSlime;
-    public int FrequencyFactorUpgradingSlime => _frequencyFactorUpgradingSlime;
     public int CountScoreForUpgrade => _countScoreForUpgrade;
 
     public void Init()
@@ -30,7 +29,7 @@ public class UpgradingSlime : MonoBehaviour
         _levelSlime++;
         _targetScale = new Vector3(_slime.Transform.localScale.x + _stepAddScale, _slime.Transform.localScale.y + _stepAddScale, _slime.Transform.localScale.z + _stepAddScale);
         StartCoroutine(UpgradeSlimeScale(_targetScale));
-        ParticleSystem levelUpEffect = Instantiate(_levelUpEffectTemplate, transform);
+        ParticleSystem levelUpEffect = Instantiate(_upgradingEffectTemplate, transform);
         levelUpEffect.transform.localScale = _targetScale;
         _slime.Transform.position = new Vector3(_slime.Transform.position.x, _slime.Transform.position.y + _offsetFromGroundY, _slime.Transform.position.z);
     }

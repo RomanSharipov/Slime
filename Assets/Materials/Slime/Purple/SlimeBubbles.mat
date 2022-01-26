@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: SlimeBubbles
-  m_Shader: {fileID: 4800000, guid: ccfc7d68845db8341944b3091b59be55, type: 3}
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: TCP2_DISABLE_WRAPPED_LIGHT TCP2_RAMPTEXT TCP2_REFLECTIONS_FRESNEL
     TCP2_RIM_LIGHTING_LIGHTMASK TCP2_UV_NORMALS_FULL _CELPRIMARYMODE_STEPS _ENVIRONMENTREFLECTIONS_OFF
     _GLOSSYREFLECTIONS_OFF _SPECULAR_SETUP _TEXTUREBLENDINGMODE_MULTIPLY _UNITYSHADOWMODE_NONE
@@ -176,7 +176,7 @@ Material:
     - _LightmapDirectionYaw: 0
     - _MatCapMaskChannel: 0
     - _MatCapType: 0
-    - _Metallic: 0.62
+    - _Metallic: 0.771
     - _Mode: 0
     - _NormalsSource: 0
     - _NormalsUVType: 0

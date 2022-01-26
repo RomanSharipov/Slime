@@ -15,7 +15,7 @@ public class Enemy : MonoBehaviour, ICountable
     [SerializeField] private int _countScoreForUpgrade;
     [SerializeField] private Transform _target;
     [SerializeField] private Player _player;
-    [SerializeField] private LayerMask _layerMask;
+    [SerializeField] private LayerMask _layerMaskFood;
 
     private Transform _randomItem;
     private Transform _transform;
@@ -30,9 +30,8 @@ public class Enemy : MonoBehaviour, ICountable
     public Slime Slime => _slime;
     public int Score => _score;
     public int CountScoreForUpgrade => _countScoreForUpgrade;
-    public LayerMask LayerMask => _layerMask;
+    public LayerMask LayerMaskFood => _layerMaskFood;
     public EnemyMovement EnemyMovement => _enemyMovement;
-    public EnemyStateMachine EnemyStateMachine => _enemyStateMachine;
     public EnemyDetectorFood EnemyDetectorFood => _enemyDetectorFood;
     public Player Player => _player;
 
@@ -50,7 +49,7 @@ public class Enemy : MonoBehaviour, ICountable
         _enemyStateMachine.Init();
         _enemyMovement = GetComponent<EnemyMovement>();
         _enemyMovement.Init();
-        _slime.ItemWasEaten += _enemyDetectorFood.SetNearbyRandomTarget;
+        _slime.NewItemWasEaten += _enemyDetectorFood.SetNearbyRandomTarget;
     }
 
     private void Update()
@@ -71,7 +70,7 @@ public class Enemy : MonoBehaviour, ICountable
 
     private void OnDisable()
     {
-        _slime.ItemWasEaten -= _enemyDetectorFood.SetNearbyRandomTarget;
+        _slime.NewItemWasEaten -= _enemyDetectorFood.SetNearbyRandomTarget;
     }
 
     public void ResetCountScoreForUpgrade()

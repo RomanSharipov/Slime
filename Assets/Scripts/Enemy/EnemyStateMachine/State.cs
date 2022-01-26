@@ -18,17 +18,16 @@ public abstract class State : MonoBehaviour
         _enemy = GetComponent<Enemy>();
     }
 
-    public void Enter(Transform target)
+    public void Enter()
     {
         if (enabled == false)
         {
-            Target = target;
             enabled = true;
 
             foreach (var transition in _transitions)
             {
                 transition.enabled = true;
-                transition.Init(Target);
+                transition.Init();
             }
         }
     }

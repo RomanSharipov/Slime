@@ -22,12 +22,12 @@ public class Item : MonoBehaviour, IEatable
     public int RequiredLevel => _requiredLevel;
     public int Reward => _reward;
 
-    private void Start()
+    private void Awake()
     {
         _boxCollider = GetComponent<BoxCollider>();
         _transform = GetComponent<Transform>();
         _meshRenderer = GetComponent<MeshRenderer>();
-        _startMaterial = GetComponent<MeshRenderer>().material;
+        _startMaterial = _meshRenderer.material;
     }
 
     private void OnTriggerExit(Collider other)
@@ -40,7 +40,6 @@ public class Item : MonoBehaviour, IEatable
 
     public IEnumerator Drown(Slime slime)
     {
-        
         Vector3 targetPosition = new Vector3();
         Vector3 targetScale = _transform.localScale * _forceReduceScale;
         float targetPositionY;
@@ -55,14 +54,13 @@ public class Item : MonoBehaviour, IEatable
         Destroy(gameObject);
     }
 
-    public void SetTransparentMaterial(Material material)
+    public void SetTransparentMaterial()
     {
-        _meshRenderer.material = material;
+        _meshRenderer.material = _transparentMaterial;
     }
 
     public virtual void BeEaten(Slime slime)
     {
-        
         _boxCollider.enabled = false;
         _transform.parent = slime.Transform;
         StartCoroutine(Drown(slime));
@@ -70,6 +68,11 @@ public class Item : MonoBehaviour, IEatable
 
     public void BeNotEaten(Slime slime)
     {
-        _meshRenderer.material = _transparentMaterial;
+        SetTransparentMaterial();
+    }
+
+    public void SetStartMaterial()
+    {
+        _meshRenderer.material = _startMaterial;
     }
 }

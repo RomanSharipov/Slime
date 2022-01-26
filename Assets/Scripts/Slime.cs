@@ -24,7 +24,7 @@ public class Slime : MonoBehaviour,IEatable
     public UpgradingSlime UpgradingSlime => _upgradingSlime;
 
     public event UnityAction SlimeWasUpgraded;
-    public event UnityAction ItemWasEaten;
+    public event UnityAction NewItemWasEaten;
 
     public void Init()
     {
@@ -55,12 +55,11 @@ public class Slime : MonoBehaviour,IEatable
 
     public void TryEat(IEatable eatable)
     {
-        
         if (_upgradingSlime.LevelSlime > eatable.RequiredLevel)
         {
             eatable.BeEaten(this);
             _countable.AddScore(eatable.Reward);
-            ItemWasEaten?.Invoke();
+            NewItemWasEaten?.Invoke();
             if (_countable.CountScoreForUpgrade == UpgradingSlime.CountScoreForUpgrade)
             {
                 SlimeWasUpgraded?.Invoke();

@@ -7,7 +7,6 @@ using UnityEngine.Events;
 [RequireComponent(typeof(PlayerMovement))]
 [RequireComponent(typeof(PlayerAnimator))]
 [RequireComponent(typeof(Slime))]
-
 public class Player : MonoBehaviour, ICountable
 {
     [SerializeField] private int _score;

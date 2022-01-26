@@ -40,7 +40,7 @@ public class EnemyDetectorFood : MonoBehaviour
     public List<Item> GetNearbyAvailableItems()
     {
         List<Item> items = new List<Item>();
-        Collider[] hitColliders = Physics.OverlapSphere(_transform.position, _distanceToFood, Enemy.LayerMask);
+        Collider[] hitColliders = Physics.OverlapSphere(_transform.position, _distanceToFood, Enemy.LayerMaskFood);
 
         foreach (var hitCollider in hitColliders)
         {

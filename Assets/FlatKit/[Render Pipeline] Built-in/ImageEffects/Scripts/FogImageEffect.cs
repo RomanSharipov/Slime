@@ -1,7 +1,7 @@
 using UnityEngine;
 
 namespace FlatKit {
-    [ExecuteInEditMode, ImageEffectAllowedInSceneView, RequireComponent(typeof(Camera))]
+    [ExecuteInEditMode, ImageEffectAllowedInSceneView, RequireComponent(typeof(UnityEngine.Camera))]
     public class FogImageEffect : MonoBehaviour {
         public bool useDistance = true;
         public Gradient distanceGradient;
@@ -22,7 +22,7 @@ namespace FlatKit {
         [HideInInspector]
         public Material material;
         
-        private Camera _camera;
+        private UnityEngine.Camera _camera;
         private Texture2D _lutDepth;
         private Texture2D _lutHeight;
 
@@ -43,7 +43,7 @@ namespace FlatKit {
 
         void Awake() {
             material = new Material(Shader.Find(ShaderName));
-            _camera = GetComponent<Camera>();
+            _camera = GetComponent<UnityEngine.Camera>();
             _camera.depthTextureMode = DepthTextureMode.Depth;
             Debug.Assert(_camera.depthTextureMode != DepthTextureMode.None);
         }

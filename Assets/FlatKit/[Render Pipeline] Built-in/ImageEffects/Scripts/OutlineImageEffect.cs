@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 namespace FlatKit {
-    [ExecuteInEditMode, ImageEffectAllowedInSceneView, RequireComponent(typeof(Camera))]
+    [ExecuteInEditMode, ImageEffectAllowedInSceneView, RequireComponent(typeof(UnityEngine.Camera))]
     public class OutlineImageEffect : MonoBehaviour {
         public Color edgeColor = Color.white;
 
@@ -18,7 +18,7 @@ namespace FlatKit {
         [HideInInspector]
         public Material material;
 
-        private Camera _camera;
+        private UnityEngine.Camera _camera;
         
         private static readonly string ShaderName = "Hidden/OutlinePlus";
         private static readonly int EdgeColorProperty = Shader.PropertyToID("_EdgeColor");
@@ -28,7 +28,7 @@ namespace FlatKit {
 
         private void Start() {
             material = new Material(Shader.Find(ShaderName));
-            _camera = GetComponent<Camera>();
+            _camera = GetComponent<UnityEngine.Camera>();
             UpdateShader();
         }
 
@@ -38,7 +38,7 @@ namespace FlatKit {
             }
 
             if (_camera == null) {
-                _camera = GetComponent<Camera>();
+                _camera = GetComponent<UnityEngine.Camera>();
             }
 
             UpdateShader();
@@ -52,7 +52,7 @@ namespace FlatKit {
             }
 
             if (_camera == null) {
-                _camera = GetComponent<Camera>();
+                _camera = GetComponent<UnityEngine.Camera>();
             }
 
 #if UNITY_EDITOR

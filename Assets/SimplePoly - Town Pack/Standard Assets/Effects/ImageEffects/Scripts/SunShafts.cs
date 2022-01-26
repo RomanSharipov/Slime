@@ -4,7 +4,7 @@ using UnityEngine;
 namespace UnityStandardAssets.ImageEffects
 {
     [ExecuteInEditMode]
-    [RequireComponent (typeof(Camera))]
+    [RequireComponent(typeof(UnityEngine.Camera))]
     [AddComponentMenu ("Image Effects/Rendering/Sun Shafts")]
     public class SunShafts : PostEffectsBase
     {
@@ -62,7 +62,7 @@ namespace UnityStandardAssets.ImageEffects
 
             // we actually need to check this every frame
             if (useDepthTexture)
-                GetComponent<Camera>().depthTextureMode |= DepthTextureMode.Depth;
+                GetComponent<UnityEngine.Camera>().depthTextureMode |= DepthTextureMode.Depth;
 
             int divider = 4;
             if (resolution == SunShaftsResolution.Normal)
@@ -72,7 +72,7 @@ namespace UnityStandardAssets.ImageEffects
 
             Vector3 v = Vector3.one * 0.5f;
             if (sunTransform)
-                v = GetComponent<Camera>().WorldToViewportPoint (sunTransform.position);
+                v = GetComponent<UnityEngine.Camera>().WorldToViewportPoint (sunTransform.position);
             else
                 v = new Vector3(0.5f, 0.5f, 0.0f);
 
@@ -90,10 +90,10 @@ namespace UnityStandardAssets.ImageEffects
             sunShaftsMaterial.SetVector ("_SunThreshold", sunThreshold);
 
             if (!useDepthTexture) {
-                var format= GetComponent<Camera>().allowHDR ? RenderTextureFormat.DefaultHDR: RenderTextureFormat.Default;
+                var format= GetComponent<UnityEngine.Camera>().allowHDR ? RenderTextureFormat.DefaultHDR : RenderTextureFormat.Default;
                 RenderTexture tmpBuffer = RenderTexture.GetTemporary (source.width, source.height, 0, format);
                 RenderTexture.active = tmpBuffer;
-                GL.ClearWithSkybox (false, GetComponent<Camera>());
+                GL.ClearWithSkybox (false, GetComponent<UnityEngine.Camera>());
 
                 sunShaftsMaterial.SetTexture ("_Skybox", tmpBuffer);
                 Graphics.Blit (source, lrDepthBuffer, sunShaftsMaterial, 3);

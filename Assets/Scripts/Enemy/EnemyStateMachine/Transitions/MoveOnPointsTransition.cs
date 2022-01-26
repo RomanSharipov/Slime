@@ -16,8 +16,7 @@ public class MoveOnPointsTransition : Transition
         if (_playerNearby && Enemy.Slime.UpgradingSlime.LevelSlime > Enemy.Player.Slime.UpgradingSlime.LevelSlime)
             return;
 
-        if (Enemy.Target != null)
-            return;
-        SwitchOnTransition();
+        if (Enemy.Target == null)
+            SwitchOnTransition();
     }
 }

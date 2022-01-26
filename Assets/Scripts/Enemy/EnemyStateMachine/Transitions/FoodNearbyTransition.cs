@@ -9,8 +9,6 @@ public class FoodNearbyTransition : Transition
     private List<Item> _availableItems = new List<Item>();
     private bool _playerNearby;
 
-
-
     private void Update()
     {
         _availableItems = Enemy.EnemyDetectorFood.GetNearbyAvailableItems();
@@ -21,16 +19,10 @@ public class FoodNearbyTransition : Transition
         if (Enemy.Player != null)
             _playerNearby = Vector3.Distance(transform.position, Enemy.Player.Transform.position) < _distanceToPlayer;
 
-        if (Enemy.Player == null)
-        {
-            SwitchOnTransition();
-            return;
-        }
-
         if (_playerNearby && Enemy.Slime.UpgradingSlime.LevelSlime > Enemy.Player.Slime.UpgradingSlime.LevelSlime)
             return;
 
-        if (TargetFood == null)
+        if (Enemy.Target == null)
             Enemy.EnemyDetectorFood.SetNearbyRandomTarget();
 
         SwitchOnTransition();

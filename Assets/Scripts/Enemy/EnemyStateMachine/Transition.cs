@@ -5,9 +5,10 @@ public abstract class Transition : MonoBehaviour
 {
     [SerializeField] private State _targetState;
 
-    protected bool _needTransit;
+    private bool _needTransit;
+
     protected Enemy _enemy;
-    protected Transform TargetFood { get; private set; }
+
     public State TargetState => _targetState;
     public bool NeedTransit => _needTransit;
     public Enemy Enemy => _enemy;
@@ -17,10 +18,9 @@ public abstract class Transition : MonoBehaviour
         _needTransit = true;
     }
 
-    public void Init(Transform target)
+    public void Init()
     {
         _needTransit = false;
         _enemy = GetComponent<Enemy>();
-        TargetFood = target;
     }
 }

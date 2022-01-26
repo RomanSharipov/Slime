@@ -336,12 +336,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ee1661f62ef2114c9b6046ab6f63555, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stepAddScale: 0.5
+  _stepAddScale: 0.8
   _offsetFromGroundY: 0.02
   _speedGrowScale: 9
   _levelSlime: 1
-  _levelUpEffectTemplate: {fileID: 2840290530996772017, guid: d546888b794265b408f18712a3ebdf47, type: 3}
-  _countScoreForUpgrade: 7
+  _upgradingEffectTemplate: {fileID: 2840290530996772017, guid: d546888b794265b408f18712a3ebdf47, type: 3}
+  _countScoreForUpgrade: 6
   _frequencyFactorUpgradingSlime: 10
 --- !u!114 &279538516109112289
 MonoBehaviour:
@@ -373,7 +373,7 @@ MonoBehaviour:
   _countScoreForUpgrade: 0
   _target: {fileID: 0}
   _player: {fileID: 0}
-  _layerMask:
+  _layerMaskFood:
     serializedVersion: 2
     m_Bits: 64
 --- !u!114 &279538516109112291
