@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(UpgradingSlime))]
 public class Slime : MonoBehaviour,IEatable
 {
     [SerializeField] private ParticleSystem _blotTemplate;

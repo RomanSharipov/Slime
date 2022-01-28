@@ -206,7 +206,6 @@ GameObject:
   - component: {fileID: 6384728101782120247}
   - component: {fileID: 279538516109112297}
   - component: {fileID: 279538516109112294}
-  - component: {fileID: 4909609395913862645}
   - component: {fileID: 279538516109112295}
   - component: {fileID: 279538516109112319}
   - component: {fileID: 279538516109112318}
@@ -216,7 +215,6 @@ GameObject:
   - component: {fileID: 279538516109112290}
   - component: {fileID: 279538516109112293}
   - component: {fileID: 279538516109112292}
-  - component: {fileID: 2522703686251270310}
   - component: {fileID: 7680070848358149367}
   - component: {fileID: 7680070848358149364}
   - component: {fileID: 7680070848358149365}
@@ -273,18 +271,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.8169861, y: 0.78070104, z: 1.1599731}
   m_Center: {x: 0.045806885, y: 0.3570149, z: -0.027076721}
---- !u!114 &4909609395913862645
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6039552284979707277}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3fd3888056a54341a59bc84e28df5e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!95 &279538516109112295
 Animator:
   serializedVersion: 3
@@ -439,19 +425,6 @@ MonoBehaviour:
   - {fileID: 7680070848358149365}
   _speed: 5
   _rotationSpeed: 4
---- !u!114 &2522703686251270310
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6039552284979707277}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bc022b183c4e64479201753ebe0d084, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _distanceToFood: 10
 --- !u!114 &7680070848358149367
 MonoBehaviour:
   m_ObjectHideFlags: 0

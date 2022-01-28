@@ -13,6 +13,7 @@ public class Game : MonoBehaviour
     [SerializeField] private Joystick _joystick;
     [SerializeField] private Vehicle[] _vehiclesTemplate;
     [SerializeField] private Camera _camera;
+    [SerializeField] private DetectorOverlapPlayer _detectorOverlapPlayer;
     [SerializeField] private float _distanceBetweenVehicles;
 
     private float _startDistanceTraveled;
@@ -40,6 +41,7 @@ public class Game : MonoBehaviour
         _player.Init(_joystick);
         _spawnerText.Init(_player);
         _camera.Init(_player);
+        _detectorOverlapPlayer.Init(_player);
 
         foreach (var spawnPointEnemy in _map.SpawnPointsEnemies)
         {

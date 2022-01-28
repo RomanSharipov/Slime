@@ -3,12 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(FoodNearbyTransition))]
 [RequireComponent(typeof(EnemyStateMachine))]
-[RequireComponent(typeof(EnemyMovement))]
-[RequireComponent(typeof(UpgradingSlime))]
 [RequireComponent(typeof(Slime))]
-[RequireComponent(typeof(EnemyDetectorFood))]
 public class Enemy : MonoBehaviour, ICountable
 {
     [SerializeField] private int _score;
@@ -23,10 +19,10 @@ public class Enemy : MonoBehaviour, ICountable
     private Vector2 _direction = new Vector2();
     private EnemyMovement _enemyMovement;
     private EnemyStateMachine _enemyStateMachine;
-    private EnemyDetectorFood _enemyDetectorFood;
-    private MoveOnPointsState _moveOnPointsState;
+    private EnemyDetectorFood _enemyDetectorFood ;
 
     public Transform Target => _target;
+    public Transform Transform => _transform;
     public Slime Slime => _slime;
     public int Score => _score;
     public int CountScoreForUpgrade => _countScoreForUpgrade;
@@ -37,18 +33,16 @@ public class Enemy : MonoBehaviour, ICountable
 
     public void Init(Player player,Transform path)
     {
-        _moveOnPointsState = GetComponent<MoveOnPointsState>();
-        _moveOnPointsState.InitPath(path);
         _player = player;
         _slime = GetComponent<Slime>();
         _slime.Init();
-        _enemyDetectorFood = GetComponent<EnemyDetectorFood>();
-        _enemyDetectorFood.Init();
+        _enemyDetectorFood = new EnemyDetectorFood();
+        _enemyDetectorFood.Init(this, _slime.UpgradingSlime);
         _transform = GetComponent<Transform>();
         _enemyStateMachine = GetComponent<EnemyStateMachine>();
-        _enemyStateMachine.Init();
-        _enemyMovement = GetComponent<EnemyMovement>();
-        _enemyMovement.Init();
+        _enemyStateMachine.Init(path);
+        _enemyMovement = new EnemyMovement();
+        _enemyMovement.Init(_transform);
         _slime.NewItemWasEaten += _enemyDetectorFood.SetNearbyRandomTarget;
     }
 

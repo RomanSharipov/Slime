@@ -2,24 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Enemy))]
-public class EnemyDetectorFood : MonoBehaviour
+public class EnemyDetectorFood 
 {
-    [SerializeField] private int _distanceToFood;
-
+    private int _distanceToFood = 10;
     private Enemy _enemy;
-    private Transform _transform;
     private Transform _randomItem;
     private UpgradingSlime _upgradingSlime;
 
     public UpgradingSlime UpgradingSlime => _upgradingSlime;
     public Enemy Enemy => _enemy;
 
-    public void Init()
+    public void Init(Enemy enemy,UpgradingSlime upgradingSlime)
     {
-        _enemy = GetComponent<Enemy>();
-        _upgradingSlime = GetComponent<UpgradingSlime>();
-        _transform = GetComponent<Transform>();
+        _enemy = enemy;
+        _upgradingSlime = upgradingSlime;
     }
 
     public void SetNearbyRandomTarget()
@@ -40,7 +36,7 @@ public class EnemyDetectorFood : MonoBehaviour
     public List<Item> GetNearbyAvailableItems()
     {
         List<Item> items = new List<Item>();
-        Collider[] hitColliders = Physics.OverlapSphere(_transform.position, _distanceToFood, Enemy.LayerMaskFood);
+        Collider[] hitColliders = Physics.OverlapSphere(_enemy.Transform.position, _distanceToFood, Enemy.LayerMaskFood);
 
         foreach (var hitCollider in hitColliders)
         {

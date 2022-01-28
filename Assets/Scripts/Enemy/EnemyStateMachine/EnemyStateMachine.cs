@@ -8,14 +8,17 @@ public class EnemyStateMachine : MonoBehaviour
 
     private Enemy _enemy;
     private State[] _states;
+    private MoveOnPointsState _moveOnPointsState;
 
     public State Current => _currentState;
 
-    public void Init()
+    public void Init(Transform path)
     {
         _enemy = GetComponent<Enemy>();
         Reset(_firstState);
         _states = GetComponents<State>();
+        _moveOnPointsState = GetComponent<MoveOnPointsState>();
+        _moveOnPointsState.InitPath(path);
 
         foreach (var state in _states)
         {

@@ -365,7 +365,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce589bd4b4807124092019c3f70fadd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 0}
   _spawnPoint: {fileID: 295952609}
   _camera: {fileID: 963194227}
   _rewardText: {fileID: 6756619597522137069, guid: 86c9bd033aa28674db7a9b21889a7b93, type: 3}
@@ -918,6 +917,7 @@ GameObject:
   - component: {fileID: 963194229}
   - component: {fileID: 963194232}
   - component: {fileID: 963194231}
+  - component: {fileID: 963194230}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1026,7 +1026,24 @@ MonoBehaviour:
   - {fileID: -85955244658405184, guid: 253a1d04345fd1c4bb16163191c3317c, type: 3}
   - {fileID: 3356837104119377933, guid: f2e1701491b996e42b29f9758105d5f5, type: 3}
   _camera: {fileID: 963194231}
+  _detectorOverlapPlayer: {fileID: 963194230}
   _distanceBetweenVehicles: 100
+--- !u!114 &963194230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d60f21491f802a4eb66156175e28116, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxDistance: 100
+  _itemLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!114 &963194231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1041,10 +1058,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _camera: {fileID: 1133342822}
   _upgradingStepOffset: {x: 0, y: 4, z: -5}
-  _itemLayerMask:
-    serializedVersion: 2
-    m_Bits: 64
-  _maxDistance: 100
 --- !u!114 &963194232
 MonoBehaviour:
   m_ObjectHideFlags: 0
