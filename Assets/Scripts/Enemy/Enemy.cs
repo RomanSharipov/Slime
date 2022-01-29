@@ -25,7 +25,7 @@ public class Enemy : MonoBehaviour, ICountable
     public Transform Transform => _transform;
     public Slime Slime => _slime;
     public int Score => _score;
-    public int CountScoreForUpgrade => _countScoreForUpgrade;
+    public int RequiredScoreForUpgrade => _countScoreForUpgrade;
     public LayerMask LayerMaskFood => _layerMaskFood;
     public EnemyMovement EnemyMovement => _enemyMovement;
     public EnemyDetectorFood EnemyDetectorFood => _enemyDetectorFood;

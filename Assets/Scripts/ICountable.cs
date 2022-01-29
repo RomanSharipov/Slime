@@ -1,6 +1,6 @@
 public interface ICountable 
 {
-    int CountScoreForUpgrade { get; }
+    int RequiredScoreForUpgrade { get; }
 
     void AddScore(int score);
     void ResetCountScoreForUpgrade();

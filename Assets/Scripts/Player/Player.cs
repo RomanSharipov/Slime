@@ -19,7 +19,7 @@ public class Player : MonoBehaviour, ICountable
     private Transform _transform;
 
     public int Score => _score;
-    public int CountScoreForUpgrade => _countScoreForUpgrade;
+    public int RequiredScoreForUpgrade => _countScoreForUpgrade;
     public PlayerInput PlayerInput => _playerInput;
     public PlayerMovement PlayerMovement => _playerMovement;
     public PlayerAnimator PlayerAnimator => _playerAnimator;

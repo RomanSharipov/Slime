@@ -61,7 +61,7 @@ public class Slime : MonoBehaviour,IEatable
             eatable.BeEaten(this);
             _countable.AddScore(eatable.Reward);
             NewItemWasEaten?.Invoke();
-            if (_countable.CountScoreForUpgrade == UpgradingSlime.CountScoreForUpgrade)
+            if (_countable.RequiredScoreForUpgrade == UpgradingSlime.CountScoreForUpgrade)
             {
                 SlimeWasUpgraded?.Invoke();
                 _countable.ResetCountScoreForUpgrade();
