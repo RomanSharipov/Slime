@@ -27,7 +27,10 @@ public class Item : MonoBehaviour, IEatable
         _drowningItem = GetComponent<ItemDrowning>();
         _drowningItem.Init(_transform);
         _meshRenderer = GetComponent<MeshRenderer>();
-        _startMaterial = _meshRenderer.material;
+        _startMaterial = _meshRenderer.sharedMaterial;
+        
+
+
     }
 
     private void OnTriggerExit(Collider other)
