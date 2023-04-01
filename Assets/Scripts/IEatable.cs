@@ -4,5 +4,4 @@ public interface IEatable
     int Reward { get; }
 
     void BeEaten(Slime slime);
-    void BeNotEaten(Slime slime);
 }

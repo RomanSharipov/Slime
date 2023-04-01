@@ -67,10 +67,6 @@ public class Slime : MonoBehaviour,IEatable
                 _countable.ResetCountScoreForUpgrade();
             }
         }
-        else
-        {
-            eatable.BeNotEaten(this);
-        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -88,10 +84,5 @@ public class Slime : MonoBehaviour,IEatable
         splash.transform.parent = null;
         splash.transform.position = _splashSpawnPoint.position;
         Destroy(gameObject);
-    }
-
-    public void BeNotEaten(Slime slime)
-    {
-        
     }
 }
