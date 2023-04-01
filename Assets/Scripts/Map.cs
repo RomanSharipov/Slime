@@ -9,9 +9,11 @@ public class Map : MonoBehaviour
     [SerializeField] private Transform _spawnPointPlayer;
     [SerializeField] private Transform _enemyPath;
     [SerializeField] private PathCreator _pathCreator;
+    [SerializeField] private Transform _blotContainer;
 
     public Transform[] SpawnPointsEnemies => _spawnPointsEnemies;
     public Transform SpawnPointPlayer => _spawnPointPlayer;
     public Transform EnemyPath => _enemyPath;
     public PathCreator PathCreator => _pathCreator;
+    public Transform BlotContainer => _blotContainer;
 }

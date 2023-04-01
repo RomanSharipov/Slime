@@ -12,6 +12,7 @@ public class Slime : MonoBehaviour,IEatable
     [SerializeField] private float _delayBetweenSpawnBlot;
     [SerializeField] private LayerMask _groundLayerMask;
     [SerializeField] private float _offsetOnGround;
+    [SerializeField] private Map _map;
 
     private float _lastSpawnTime;
     private Transform _transform;
@@ -27,12 +28,13 @@ public class Slime : MonoBehaviour,IEatable
     public event UnityAction SlimeWasUpgraded;
     public event UnityAction NewItemWasEaten;
 
-    public void Init()
+    public void Init(Map map)
     {
         _countable = GetComponent<ICountable>();
         _transform = GetComponent<Transform>();
         _upgradingSlime = GetComponent<UpgradingSlime>();
         _upgradingSlime.Init();
+        _map = map;
     }
 
     public void TryCreateBlot(Vector2 direction)
@@ -46,7 +48,7 @@ public class Slime : MonoBehaviour,IEatable
                 _blotSpawnPointPosition = new Vector3( hit.point.x,hit.point.y + _offsetOnGround, hit.point.z);
                 ParticleSystem blot = Instantiate(_blotTemplate, _transform);
                 
-                blot.transform.parent = null;
+                blot.transform.parent = _map.BlotContainer;
                 blot.transform.position = _blotSpawnPointPosition;
                 _lastSpawnTime = _delayBetweenSpawnBlot;
             }

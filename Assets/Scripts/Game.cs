@@ -38,7 +38,7 @@ public class Game : MonoBehaviour
     {
         _map = Instantiate(_mapTemplate, _spawnPointMap.position, _spawnPointMap.rotation);
         _player = Instantiate(_playerTemplate, _map.SpawnPointPlayer.position, _map.SpawnPointPlayer.rotation);
-        _player.Init(_joystick);
+        _player.Init(_joystick, _map);
         _spawnerText.Init(_player);
         _camera.Init(_player);
         _detectorOverlapPlayer.Init(_player);
@@ -46,7 +46,7 @@ public class Game : MonoBehaviour
         foreach (var spawnPointEnemy in _map.SpawnPointsEnemies)
         {
             Enemy enemy = Instantiate(_enemyTemplate, spawnPointEnemy.position, spawnPointEnemy.rotation);
-            enemy.Init(_player, _map.EnemyPath);
+            enemy.Init(_player, _map);
             _enemies.Add(enemy);
         }
 

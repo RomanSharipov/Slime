@@ -31,7 +31,7 @@ public class Player : MonoBehaviour, ICountable
     public event UnityAction<int> AddedScore;
     public event UnityAction Died;
 
-    public void Init(Joystick joystick)
+    public void Init(Joystick joystick,Map map)
     {
         _transform = GetComponent<Transform>();
         _playerInput = GetComponent<PlayerInput>();
@@ -41,7 +41,7 @@ public class Player : MonoBehaviour, ICountable
         _playerAnimator = GetComponent<PlayerAnimator>();
         _playerAnimator.Init();
         _slime = GetComponent<Slime>();
-        _slime.Init();
+        _slime.Init(map);
         _playerInput.Walked += _slime.TryCreateBlot;
     }
 

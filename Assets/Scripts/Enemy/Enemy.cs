@@ -31,16 +31,16 @@ public class Enemy : MonoBehaviour, ICountable
     public EnemyDetectorFood EnemyDetectorFood => _enemyDetectorFood;
     public Player Player => _player;
 
-    public void Init(Player player,Transform path)
+    public void Init(Player player,Map map)
     {
         _player = player;
         _slime = GetComponent<Slime>();
-        _slime.Init();
+        _slime.Init(map);
         _enemyDetectorFood = new EnemyDetectorFood();
         _enemyDetectorFood.Init(this, _slime.UpgradingSlime);
         _transform = GetComponent<Transform>();
         _enemyStateMachine = GetComponent<EnemyStateMachine>();
-        _enemyStateMachine.Init(path);
+        _enemyStateMachine.Init(map.EnemyPath);
         _enemyMovement = new EnemyMovement();
         _enemyMovement.Init(_transform);
         _slime.NewItemWasEaten += _enemyDetectorFood.SetNearbyRandomTarget;
