@@ -50,11 +50,6 @@ public class Item : MonoBehaviour, IEatable
         _drowningItem.Drown(slime);
     }
 
-    public void BeNotEaten(Slime slime)
-    {
-        SetTransparentMaterial();
-    }
-
     public void SetStartMaterial()
     {
         _meshRenderer.material = _startMaterial;

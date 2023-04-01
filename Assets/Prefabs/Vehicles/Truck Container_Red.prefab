@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2391056}
   - component: {fileID: 6494150296415998349}
   m_Layer: 0
-  m_Name: SPW_Vehicle_Land_Static_Truck Container_Color02
+  m_Name: Truck Container_Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
