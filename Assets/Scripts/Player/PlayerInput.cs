@@ -5,21 +5,21 @@ using UnityEngine.Events;
 
 public class PlayerInput : MonoBehaviour
 {
-    [SerializeField] private Joystick _joystick;
+    private IInput _input;
 
     public event UnityAction<Vector2> Walked;
     public event UnityAction Stopped;
 
     private Vector2 _direction = new Vector2();
 
-    public void Init(Joystick joystick)
+    public void Init(IInput input)
     {
-        _joystick = joystick;
+        _input = input;
     }
 
     private void Update()
     {
-        _direction.Set(_joystick.Horizontal, _joystick.Vertical);
+        _direction.Set(_input.Horizontal, _input.Vertical);
 
         if (_direction != Vector2.zero)
         {

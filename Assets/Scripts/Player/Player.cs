@@ -31,11 +31,11 @@ public class Player : MonoBehaviour, ICountable
     public event UnityAction<int> AddedScore;
     public event UnityAction Died;
 
-    public void Init(Joystick joystick,Map map)
+    public void Init(IInput input, Map map)
     {
         _transform = GetComponent<Transform>();
         _playerInput = GetComponent<PlayerInput>();
-        _playerInput.Init(joystick);
+        _playerInput.Init(input);
         _playerMovement = GetComponent<PlayerMovement>();
         _playerMovement.Init();
         _playerAnimator = GetComponent<PlayerAnimator>();

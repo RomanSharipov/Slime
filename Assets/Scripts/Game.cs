@@ -11,11 +11,14 @@ public class Game : MonoBehaviour
     [SerializeField] private Transform _spawnPointMap;
     [SerializeField] private SpawnerText _spawnerText;
     [SerializeField] private Joystick _joystick;
+    [SerializeField] private KeyboardInput _keyboardInput;
     [SerializeField] private Vehicle[] _vehiclesTemplate;
     [SerializeField] private Camera _camera;
     [SerializeField] private DetectorOverlapPlayer _detectorOverlapPlayer;
     [SerializeField] private float _distanceBetweenVehicles;
+    [SerializeField] private TypeInput _typeInput;
 
+    private IInput _input;
     private float _startDistanceTraveled;
     private Player _player;
     private Map _map;
@@ -38,7 +41,8 @@ public class Game : MonoBehaviour
     {
         _map = Instantiate(_mapTemplate, _spawnPointMap.position, _spawnPointMap.rotation);
         _player = Instantiate(_playerTemplate, _map.SpawnPointPlayer.position, _map.SpawnPointPlayer.rotation);
-        _player.Init(_joystick, _map);
+        PlayerInputInit();
+        _player.Init(_input, _map);
         _spawnerText.Init(_player);
         _camera.Init(_player);
         _detectorOverlapPlayer.Init(_player);
@@ -78,5 +82,23 @@ public class Game : MonoBehaviour
                 Destroy(enemy.gameObject);
         }
         _enemies = new List<Enemy>();
+    }
+
+    private void PlayerInputInit()
+    {
+        switch (_typeInput)
+        {
+            case TypeInput.Keyboard:
+                _input = _keyboardInput;
+                _joystick.gameObject.SetActive(false);
+                break;
+            case TypeInput.Joystick:
+                _input = _joystick;
+                _keyboardInput.gameObject.SetActive(false);
+                break;
+            default:
+                _input = _keyboardInput;
+                break;
+        }
     }
 }
